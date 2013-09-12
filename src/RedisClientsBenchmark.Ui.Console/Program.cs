@@ -12,7 +12,7 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 	{
 		static void Main(string[] args)
 		{
-			using (var benchmark = new Benchmark())
+			using (var benchmark = new LocalRedisBenchmark())
 			{
 				Console.WriteLine("Press any key to exit");
 				Console.ReadLine();
