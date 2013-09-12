@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Ui.Console", "src\RedisClientsBenchmark.Ui.Console\RedisClientsBenchmark.Ui.Console.csproj", "{805D48F0-0BE1-48FA-B746-28F4247539AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Client.ServiceStackRedis", "src\RedisClientsBenchmark.Client.ServiceStackRedis\RedisClientsBenchmark.Client.ServiceStackRedis.csproj", "{DF0460F0-B692-44FD-80CA-93C071E3D679}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Client.BookSleeve", "src\RedisClientsBenchmark.Client.BookSleeve\RedisClientsBenchmark.Client.BookSleeve.csproj", "{0F80DFE8-3BE7-414F-91C5-03261D7D0FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Client.CsRedis", "src\RedisClientsBenchmark.Client.CsRedis\RedisClientsBenchmark.Client.CsRedis.csproj", "{DA5ACFEA-F05A-4CDB-99EA-4347F5D7BF9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Client.RedisBoost", "src\RedisClientsBenchmark.Client.RedisBoost\RedisClientsBenchmark.Client.RedisBoost.csproj", "{3FEDEC0F-D0B9-4E6C-9704-A4850F6CB58C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientsBenchmark.Client.Generic", "src\RedisClientsBenchmark.Client.Generic\RedisClientsBenchmark.Client.Generic.csproj", "{4966F469-18FE-4846-8418-2D066C1D6F24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{805D48F0-0BE1-48FA-B746-28F4247539AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805D48F0-0BE1-48FA-B746-28F4247539AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805D48F0-0BE1-48FA-B746-28F4247539AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805D48F0-0BE1-48FA-B746-28F4247539AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF0460F0-B692-44FD-80CA-93C071E3D679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0460F0-B692-44FD-80CA-93C071E3D679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0460F0-B692-44FD-80CA-93C071E3D679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0460F0-B692-44FD-80CA-93C071E3D679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F80DFE8-3BE7-414F-91C5-03261D7D0FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F80DFE8-3BE7-414F-91C5-03261D7D0FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F80DFE8-3BE7-414F-91C5-03261D7D0FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F80DFE8-3BE7-414F-91C5-03261D7D0FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5ACFEA-F05A-4CDB-99EA-4347F5D7BF9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5ACFEA-F05A-4CDB-99EA-4347F5D7BF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5ACFEA-F05A-4CDB-99EA-4347F5D7BF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5ACFEA-F05A-4CDB-99EA-4347F5D7BF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FEDEC0F-D0B9-4E6C-9704-A4850F6CB58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FEDEC0F-D0B9-4E6C-9704-A4850F6CB58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FEDEC0F-D0B9-4E6C-9704-A4850F6CB58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FEDEC0F-D0B9-4E6C-9704-A4850F6CB58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4966F469-18FE-4846-8418-2D066C1D6F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4966F469-18FE-4846-8418-2D066C1D6F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4966F469-18FE-4846-8418-2D066C1D6F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4966F469-18FE-4846-8418-2D066C1D6F24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
