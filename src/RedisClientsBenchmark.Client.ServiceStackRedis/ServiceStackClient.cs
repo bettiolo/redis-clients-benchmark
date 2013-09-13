@@ -7,6 +7,7 @@ namespace RedisClientsBenchmark.Client.ServiceStackRedis
 {
 	public class ServiceStackClient : AbstractRedisClient
 	{
+
 		private readonly RedisClient _redisClient;
 
 		public ServiceStackClient(string hostName, int port, int timeoutInSeconds)
@@ -46,5 +47,6 @@ namespace RedisClientsBenchmark.Client.ServiceStackRedis
 		{
 			_redisClient.Dispose();
 		}
+
 	}
 }

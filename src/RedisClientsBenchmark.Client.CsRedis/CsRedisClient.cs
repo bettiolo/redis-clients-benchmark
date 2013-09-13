@@ -9,17 +9,28 @@ namespace RedisClientsBenchmark.Client.CsRedis
 {
 	public class CsRedisClient : AbstractRedisClient
 	{
+
+		private readonly bool _async;
 		private readonly RedisClientAsync _redisClient;
 
-		public CsRedisClient(string hostName, int port, int timeoutInSeconds)
+		public CsRedisClient(string hostName, int port, int timeoutInSeconds, bool async = true)
 		{
+			_async = async;
 			_redisClient = new RedisClientAsync(hostName, port, timeoutInSeconds * 1000);
 			_redisClient.ExceptionOccurred += (sender, ex) => LogError((Exception)ex.ExceptionObject);
 		}
 
 		public override void RPush(string key, string value)
 		{
-			_redisClient.RPush(key, value);
+			if (_async)
+			{
+				_redisClient.RPush(key, value);
+			}
+			else
+			{
+				var rpushTask = _redisClient.RPush(key, value);
+				rpushTask.Wait();
+			}
 		}
 
 		public override long LLen(string key)
@@ -45,5 +56,6 @@ namespace RedisClientsBenchmark.Client.CsRedis
 		{
 			_redisClient.Dispose();
 		}
+
 	}
 }

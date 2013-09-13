@@ -44,5 +44,11 @@ namespace RedisClientsBenchmark.Client.Generic
 		}
 
 		public abstract void Dispose();
+
+		public bool Cleanup(string queueName)
+		{
+			return Del(queueName);
+		}
+
 	}
 }

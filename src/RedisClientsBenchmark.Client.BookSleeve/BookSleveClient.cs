@@ -6,10 +6,13 @@ namespace RedisClientsBenchmark.Client.BookSleeve
 {
 	public class BookSleveClient : AbstractRedisClient
 	{
+
+		private readonly bool _async;
 		private readonly RedisConnection _redisClient;
 
-		public BookSleveClient(string hostName, int port, int timeoutInSeconds)
+		public BookSleveClient(string hostName, int port, int timeoutInSeconds, bool async = true)
 		{
+			_async = async;
 			_redisClient = new RedisConnection(hostName, port, timeoutInSeconds * 1000);
 			_redisClient.Error += (sender, args) => LogError(args.Exception);
 
@@ -22,7 +25,14 @@ namespace RedisClientsBenchmark.Client.BookSleeve
 
 		public override void RPush(string key, string value)
 		{
-			_redisClient.Lists.AddLast(0, key, value);
+			if (_async) {
+				_redisClient.Lists.AddLast(0, key, value);
+			}
+			else
+			{
+				var rpushTask = _redisClient.Lists.AddLast(0, key, value);
+				rpushTask.Wait();
+			}
 		}
 
 		public override long LLen(string key)
@@ -48,5 +58,6 @@ namespace RedisClientsBenchmark.Client.BookSleeve
 		{
 			_redisClient.Dispose();
 		}
+
 	}
 }

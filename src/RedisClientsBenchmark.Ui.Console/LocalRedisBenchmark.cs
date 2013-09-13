@@ -53,7 +53,8 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 		{
 			var processStartInfo = new ProcessStartInfo(_redisServerPath)
 			{
-				Arguments = "\"" + _redisServerconfig + "\" loglevel verbose",
+				Arguments = "\"" + _redisServerconfig + "\" " +
+				            "loglevel verbose",
 				UseShellExecute = true,
 				CreateNoWindow = false,
 				WindowStyle = ProcessWindowStyle.Normal,

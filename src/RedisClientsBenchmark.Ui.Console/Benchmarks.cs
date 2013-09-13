@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using RedisClientsBenchmark.Client.BookSleeve;
 using RedisClientsBenchmark.Client.CsRedis;
 using RedisClientsBenchmark.Client.Generic;
@@ -14,20 +15,21 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 	{
 		private static DateTime _beginningOfUnixTime = new DateTime(1970, 1, 1);
 		private const string QueueNamePrefix = "benchmark-test-queue-";
-		private const int Iterations = 100000;
+		private const int Iterations = 1000000;
 		private const string HostName = "localhost";
 		private const int Port = 6379;
 		private const int TimeoutInSeconds = 1;
+		private const bool Async = true;
 
 		public List<ITestResult> Execute()
 		{
 			Console.WriteLine("Setting up benchmarks");
 			var redisClients = new List<AbstractRedisClient>
 			{
-				new CsRedisClient(HostName, Port, TimeoutInSeconds),
-				new BookSleveClient(HostName, Port, TimeoutInSeconds),
-				new RedisBoostClient(HostName, Port, TimeoutInSeconds),
-				new ServiceStackClient(HostName, Port, TimeoutInSeconds)
+				new CsRedisClient(HostName, Port, TimeoutInSeconds, Async),
+				new BookSleveClient(HostName, Port, TimeoutInSeconds, Async),
+				new ServiceStackClient(HostName, Port, TimeoutInSeconds),
+				new RedisBoostClient(HostName, Port, TimeoutInSeconds, Async),
 			};
 
 			Console.WriteLine("Benchmark ready, press enter to run.");
@@ -35,19 +37,28 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 
 			var testGroup = new TestGroup("Client Benchmarks");
 			var queueIndex = 0;
+			var sw = new Stopwatch();
 			foreach (var redisClient in redisClients)
 			{
+				sw.Start();
 				Console.WriteLine("Benchmarking: " + redisClient.Name);
 				redisClient.SetLogErrorCallback(ex => Console.WriteLine(ex.Message));
-				BenchmarkClient(redisClient, QueueNamePrefix + queueIndex, testGroup, Iterations);
-				queueIndex++;
-			}
-
-			queueIndex = 0;
-			foreach (var redisClient in redisClients)
-			{
+				var queueName = QueueNamePrefix + queueIndex;
+				redisClient.Cleanup(queueName);
+				BenchmarkClient(redisClient, queueName, testGroup, Iterations);
+				if (!redisClient.Cleanup(queueName))
+				{
+					Console.WriteLine("{0}: Error cleaning up", queueName);
+				}
+				else
+				{
+					Console.WriteLine("{0}: cleaned up", queueName);
+				}
 				redisClient.Dispose();
 				queueIndex++;
+				Console.WriteLine("Elapsed: {0}", sw.Elapsed);
+				Console.WriteLine();
+				sw.Reset();
 			}
 
 			Console.WriteLine("Benchmark ended");
@@ -56,10 +67,6 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 
 		private void BenchmarkClient(AbstractRedisClient redisClient, string queueName, TestGroup testGroup, int iterations)
 		{
-			if (redisClient.Del(queueName))
-			{
-				Console.WriteLine("{0}: deleted", queueName);
-			}
 			testGroup.PlanAndExecute(
 				"Testing: " + redisClient.Name,
 				() => redisClient.RPush(queueName, GetTestData()),

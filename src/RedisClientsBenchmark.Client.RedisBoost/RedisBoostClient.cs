@@ -5,10 +5,13 @@ namespace RedisClientsBenchmark.Client.RedisBoost
 {
 	public class RedisBoostClient : AbstractRedisClient
 	{
+
+		private readonly bool _async;
 		private readonly IRedisClient _redisClient;
 
-		public RedisBoostClient(string hostName, int port, int timeoutInSeconds)
+		public RedisBoostClient(string hostName, int port, int timeoutInSeconds, bool async = true)
 		{
+			_async = async;
 			var redisClientConnectTask = RedisClient.ConnectAsync(hostName, port);
 			redisClientConnectTask.Wait();
 			_redisClient = redisClientConnectTask.Result;
@@ -17,7 +20,15 @@ namespace RedisClientsBenchmark.Client.RedisBoost
 
 		public override void RPush(string key, string value)
 		{
-			_redisClient.RPushAsync(key, value);
+			if (_async)
+			{
+				_redisClient.RPushAsync(key, value);
+			}
+			else
+			{
+				var rpushTask = _redisClient.RPushAsync(key, value);
+				rpushTask.Wait();
+			}
 		}
 
 		public override long LLen(string key)
@@ -43,5 +54,6 @@ namespace RedisClientsBenchmark.Client.RedisBoost
 		{
 			_redisClient.Dispose();
 		}
+
 	}
 }
