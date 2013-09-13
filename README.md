@@ -1,5 +1,5 @@
-Redis Client Benchmarks for .Net Framework
-=====================
+Redis Clients Benchmark for .Net Framework
+==========================================
 
 The RPUSH benchmark consists of:
 - DEL test-queue
