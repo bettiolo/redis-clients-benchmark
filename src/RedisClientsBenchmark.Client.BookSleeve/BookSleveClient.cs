@@ -27,17 +27,16 @@ namespace RedisClientsBenchmark.Client.BookSleeve
 
 		public override long LLen(string key)
 		{
-			var queueLengthTask = _redisClient.Lists.GetLength(0, key);
-			queueLengthTask.Wait();
-			return queueLengthTask.Result;
+			var llenTask = _redisClient.Lists.GetLength(0, key);
+			llenTask.Wait();
+			return llenTask.Result;
 		}
 
-		public override long Del(string key)
+		public override bool Del(string key)
 		{
-			throw new NotSupportedException();
-			//var queueLengthTask = _redisClient.Del(0, key);
-			//queueLengthTask.Wait();
-			//return queueLengthTask.Result;
+			var delTask = _redisClient.Keys.Remove(0, key);
+			delTask.Wait();
+			return delTask.Result;
 		}
 
 		public override string Name

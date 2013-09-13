@@ -24,8 +24,7 @@ namespace RedisClientsBenchmark.Client.ServiceStackRedis
 			catch (Exception ex)
 			{
 				LogError(ex);
-			}
-			
+			}	
 		}
 
 		public override long LLen(string key)
@@ -33,9 +32,9 @@ namespace RedisClientsBenchmark.Client.ServiceStackRedis
 			return _redisClient.LLen(key);
 		}
 
-		public override long Del(string key)
+		public override bool Del(string key)
 		{
-			return _redisClient.Del(key);
+			return _redisClient.Del(key) > 0;
 		}
 
 		public override string Name

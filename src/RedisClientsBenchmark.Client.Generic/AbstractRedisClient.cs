@@ -22,7 +22,7 @@ namespace RedisClientsBenchmark.Client.Generic
 
 		public abstract long LLen(string key);
 
-		public abstract long Del(string key);
+		public abstract bool Del(string key);
 
 		public abstract string Name { get; }
 

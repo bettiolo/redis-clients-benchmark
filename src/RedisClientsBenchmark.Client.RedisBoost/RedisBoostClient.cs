@@ -22,14 +22,16 @@ namespace RedisClientsBenchmark.Client.RedisBoost
 
 		public override long LLen(string key)
 		{
-			var queueLengthTask = _redisClient.LLenAsync(key);
-			queueLengthTask.Wait();
-			return queueLengthTask.Result;
+			var llenTask = _redisClient.LLenAsync(key);
+			llenTask.Wait();
+			return llenTask.Result;
 		}
 
-		public override long Del(string key)
+		public override bool Del(string key)
 		{
-			throw new System.NotImplementedException();
+			var delTask = _redisClient.DelAsync(key);
+			delTask.Wait();
+			return delTask.Result > 0;
 		}
 
 		public override string Name

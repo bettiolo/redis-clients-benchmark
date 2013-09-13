@@ -24,14 +24,16 @@ namespace RedisClientsBenchmark.Client.CsRedis
 
 		public override long LLen(string key)
 		{
-			var queueLengthTask = _redisClient.LLen(key);
-			queueLengthTask.Wait();
-			return queueLengthTask.Result;
+			var llenTask = _redisClient.LLen(key);
+			llenTask.Wait();
+			return llenTask.Result;
 		}
 
-		public override long Del(string key)
+		public override bool Del(string key)
 		{
-			throw new NotImplementedException();
+			var delTask = _redisClient.Del(key);
+			delTask.Wait();
+			return delTask.Result > 0;
 		}
 
 		public override string Name
