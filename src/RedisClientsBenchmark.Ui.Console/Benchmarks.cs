@@ -15,7 +15,7 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 	{
 		private static DateTime _beginningOfUnixTime = new DateTime(1970, 1, 1);
 		private const string QueueNamePrefix = "benchmark-test-queue-";
-		private const int Iterations = 1000000;
+		private const int Iterations = 100;
 		private const string HostName = "localhost";
 		private const int Port = 6379;
 		private const int TimeoutInSeconds = 1;

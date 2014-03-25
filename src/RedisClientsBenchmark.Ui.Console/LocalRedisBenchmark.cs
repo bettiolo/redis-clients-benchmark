@@ -68,7 +68,6 @@ namespace RedisClientsBenchmark.Ui.CommandLine
 		{
 			if (_redisProcess != null)
 			{
-				_redisProcess.Close();
 				_redisProcess.CloseMainWindow();
 				_redisProcess.Dispose();
 			}

@@ -50,5 +50,29 @@ namespace RedisClientsBenchmark.Client.Generic
 			return Del(queueName);
 		}
 
+		protected void ExecuteAndHandle(Action action)
+		{
+			try
+			{
+				action();
+			}
+			catch (Exception ex)
+			{
+				LogError(ex);
+			}
+		}
+
+		protected T ExecuteAndHandle<T>(Func<T> action)
+		{
+			try
+			{
+				return action();
+			}
+			catch (Exception ex)
+			{
+				LogError(ex);
+				return default(T);
+			}
+		}
 	}
 }

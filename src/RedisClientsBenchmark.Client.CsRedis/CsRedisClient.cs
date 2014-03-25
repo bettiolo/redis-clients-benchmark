@@ -24,27 +24,39 @@ namespace RedisClientsBenchmark.Client.CsRedis
 		{
 			if (_async)
 			{
-				_redisClient.RPush(key, value);
+				ExecuteAndHandle(() =>
+				{
+					_redisClient.RPush(key, value);
+				});
 			}
 			else
 			{
-				var rpushTask = _redisClient.RPush(key, value);
-				rpushTask.Wait();
+				ExecuteAndHandle(() =>
+				{
+					var rpushTask = _redisClient.RPush(key, value);
+					rpushTask.Wait();
+				});
 			}
 		}
 
 		public override long LLen(string key)
 		{
-			var llenTask = _redisClient.LLen(key);
-			llenTask.Wait();
-			return llenTask.Result;
+			return ExecuteAndHandle(() =>
+			{
+				var llenTask = _redisClient.LLen(key);
+				llenTask.Wait();
+				return llenTask.Result;
+			});
 		}
 
 		public override bool Del(string key)
 		{
-			var delTask = _redisClient.Del(key);
-			delTask.Wait();
-			return delTask.Result > 0;
+			return ExecuteAndHandle(() =>
+			{
+				var delTask = _redisClient.Del(key);
+				delTask.Wait();
+				return delTask.Result > 0;
+			});
 		}
 
 		public override string Name
